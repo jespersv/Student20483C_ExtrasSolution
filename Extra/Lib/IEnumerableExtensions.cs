@@ -5,10 +5,8 @@ namespace Extra
 {
     public static class IEnumerableExtensions
     {
-        public static IEnumerable<T> RemoveSequenceDuplicate<T>(this IEnumerable<T> values) where T : struct, IConvertible
+        public static IEnumerable<T> RemoveSequenceDuplicate<T>(this IEnumerable<T> values) where T : Enum
         {
-            if (!typeof(T).IsEnum) throw new ArgumentException("T must be an enumerated type");
-
             int previous = -1;
             foreach (var value in values)
             {
