@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Extra
 {
-    public static class SectionExtension
+    public static class VectorFactory
     {
         public static IEnumerable<Vector> ToVectors(this IEnumerable<Section> sections) => sections.Select(ToVector);
 
@@ -15,7 +15,6 @@ namespace Extra
                     return Vector.Top;
                 return Vector.Up;
             }
-
             if (s.Prev > s.Curr) //down,bottom
             {
                 if (s.Next > s.Curr) return Vector.Bottom;

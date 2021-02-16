@@ -6,7 +6,7 @@ using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 namespace Extra
 {
     [TestClass]
-    public class SectionTests
+    public class VectorFactoryTests
     {
         [TestCase(new[] { 1, 1, 1 }, Vector.Plateau)]
         [TestCase(new[] { 1, 0, 1 }, Vector.Bottom)]
@@ -21,18 +21,19 @@ namespace Extra
             Assert.AreEqual(expected, plat.ToVector());
         }
     }
+
     [TestClass]
     public class SectionFactoryTests
     {
-        [TestCase(new[] { 1,1,1 }, 1)]
-        [TestCase(new[] { 1,1,1,1 }, 2)]
-        [TestCase(new[] { 1,1,1,1,1 }, 3)]
-        [TestCase(new[] { 1,1,1,1,1,1 }, 4)] //etc length-2
+        [TestCase(new[] { 1, 1, 1 }, 1)]
+        [TestCase(new[] { 1, 1, 1, 1 }, 2)]
+        [TestCase(new[] { 1, 1, 1, 1, 1 }, 3)]
+        [TestCase(new[] { 1, 1, 1, 1, 1, 1 }, 4)] //etc length-2
         public void SectionTest(int[] s, int expected)
         {
-            var sections= s.ToSections();
+            var sections = s.ToSections();
             Assert.AreEqual(expected, sections.Count());
-            Assert.AreEqual(s.Length-2, sections.Count());
+            Assert.AreEqual(s.Length - 2, sections.Count());
         }
     }
 }

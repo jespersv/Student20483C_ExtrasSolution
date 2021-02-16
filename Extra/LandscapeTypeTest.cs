@@ -41,6 +41,7 @@ namespace Extra
                 .ToSections()
                 .ToVectors()
                 .Where(v => v != Vector.Plateau)
+                .RemoveSequenceDuplicate()
                 .ToList()
                 .Map(VectorEvaluator.Eval);
         }
