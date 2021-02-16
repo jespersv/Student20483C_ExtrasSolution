@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using System.Linq;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
@@ -32,10 +34,11 @@ namespace Extra
 
         public void Test_LandscapeType(int[] arr, string expected)
         {
-            Assert.AreEqual(expected, LandscapeType(arr));
+            Assert.AreEqual(expected, LandscapeType(arr, VectorEvaluator.Eval));
+            Assert.AreEqual(expected, LandscapeType(arr, VectorEvaluator.Eval2));
         }
 
-        private string LandscapeType(int[] arr)
+        private string LandscapeType(int[] arr, Func<List<Vector>,string> eval)
         {
             return arr
                 .ToSections()
@@ -43,7 +46,7 @@ namespace Extra
                 .Where(v => v != Vector.Plateau)
                 .RemoveSequenceDuplicate()
                 .ToList()
-                .Map(VectorEvaluator.Eval);
+                .Map(eval);
         }
     }
 }

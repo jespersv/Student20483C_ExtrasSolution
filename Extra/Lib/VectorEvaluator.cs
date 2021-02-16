@@ -5,23 +5,42 @@ namespace Extra
 {
     public static class VectorEvaluator
     {
+        public static string Eval2(List<Vector> vectors)
+        {
+            var guess = ResultConsts.Neither;
+            for (int i = 0; i < vectors.Count; i++)
+            {
+                var vector = vectors[i];
+                if (i == 0)
+                {
+                    if (vector == Vector.Up || vector == Vector.Top) guess = ResultConsts.Mountain;
+                    if (vector == Vector.Down || vector == Vector.Bottom) guess = ResultConsts.Valley;
+                    var hasNext = i < vectors.Count - 1;
+                    if (hasNext) continue;
+                    if (vector == Vector.Up || vector == Vector.Down) return ResultConsts.Neither;
+                    continue;
+                }
+                var previous = vectors[i - 1];
+                if (previous == Vector.Up && vector != Vector.Top) return ResultConsts.Neither;
+                if (previous == Vector.Down && vector != Vector.Bottom) return ResultConsts.Neither;
+                if (previous == Vector.Top && vector != Vector.Down) return ResultConsts.Neither;
+                if (previous == Vector.Bottom && vector != Vector.Up) return ResultConsts.Neither;
+            }
+
+            return guess;
+        }
+
         public static string Eval(List<Vector> vectors)
         {
+            if (vectors.Count(p => p == Vector.Top) > 1) return ResultConsts.Neither;
+            if (vectors.Count(p => p == Vector.Bottom) > 1) return ResultConsts.Neither;
+
             if (vectors.Count == 1)
             {
                 if (vectors.First() == Vector.Top) return ResultConsts.Mountain;
                 if (vectors.First() == Vector.Bottom) return ResultConsts.Valley;
                 return ResultConsts.Neither;
             }
-
-            //this part can be done with vectors.Count(predicate) >1. but this is more fun
-            var totals = vectors
-                .GroupBy(p => p)
-                .ToDictionary(p => p.Key, p => p.Count());
-            if (totals.ContainsKey(Vector.Top) && totals[Vector.Top] > 1) return ResultConsts.Neither;
-            if (totals.ContainsKey(Vector.Bottom) && totals[Vector.Bottom] > 1) return ResultConsts.Neither;
-            if (vectors.Distinct().Count() == 1) return ResultConsts.Neither;
-
             if (vectors.Count == 3)
             {
                 if (vectors[0] == Vector.Up && vectors[1] == Vector.Top && vectors[2] == Vector.Down)
