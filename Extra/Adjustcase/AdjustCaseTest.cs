@@ -1,7 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
-using System;
-using System.Globalization;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace Extra
@@ -31,11 +29,12 @@ namespace Extra
             {
                 var w = start[i];
                 var t = template[i];
-                if (char.IsUpper(w) && char.IsLower(t))  w = char.ToLower(w);
-                else if (char.IsLower(w) && char.IsUpper(t))  w = char.ToUpper(w);
+                if (char.IsUpper(w) && char.IsLower(t)) w = char.ToLower(w);
+                else if (char.IsLower(w) && char.IsUpper(t)) w = char.ToUpper(w);
                 newStart[i] = w;
             }
 
             return $"{new string(newStart)}{rest}";
         }
+    }
 }
