@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
@@ -31,14 +31,15 @@ namespace Extra
         [TestCase(new[] { 0, 1 }, ResultConsts.Neither)]
         [TestCase(new[] { 1, 0 }, ResultConsts.Neither)]
         [TestCase(new[] { 0, 0, 0 }, ResultConsts.Neither)]
-
+        //[TestCase(new[] { 1, 2, 3, 4, 5, 5, 4, 3, 2 }, ResultConsts.Mountain)] //wide top not supported
+        //[TestCase(new[] { 5, 4, 3, 3, 4, 5 }, ResultConsts.Valley)] //wide bottom not supported
         public void Test_LandscapeType(int[] arr, string expected)
         {
             Assert.AreEqual(expected, LandscapeType(arr, VectorEvaluator.Eval));
             Assert.AreEqual(expected, LandscapeType(arr, VectorEvaluator.Eval2));
         }
 
-        private string LandscapeType(int[] arr, Func<List<Vector>,string> eval)
+        private string LandscapeType(int[] arr, Func<List<Vector>, string> eval)
         {
             return arr
                 .ToSections()
