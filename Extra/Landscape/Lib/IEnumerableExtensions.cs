@@ -5,7 +5,7 @@ namespace Extra
 {
     public static class IEnumerableExtensions
     {
-        public static IEnumerable<T> RemoveSequenceDuplicate<T>(this IEnumerable<T> values) where T : Enum
+        public static IEnumerable<T> RemoveSequenceDuplicate<T>(this IEnumerable<T> values) where T : struct
         {
             int previous = -1;
             foreach (var value in values)
